@@ -67,7 +67,6 @@ jobs:
         with:
           title: 'chore(release): version packages 🦋'
           publish: pnpm publish:packages
-          version: pnpm version:packages
           commit: 'chore(release): version packages 🦋 [skip ci]'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
