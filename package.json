@@ -1,0 +1,19 @@
+{
+  "name": "monorepo-poc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "pnpm -r --stream run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish:packages": "changeset publish",
+    "version:packages": "changeset version"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.1"
+  }
+}
