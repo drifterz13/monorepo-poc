@@ -3,11 +3,11 @@ name: 🗳️ Docker Build & Push
 on:
   release:
     types: [published]
-  push:
-    tags:
-      - "school-web@*"
-      - "school-api@*"
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag'
+        required: false
 
 jobs:
   build_and_push_image:
@@ -22,24 +22,35 @@ jobs:
 
       - name: 🪪 Get tag name
         id: get_tag
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+        run: echo ::set-output name=tag::${{ github.event.inputs.release_tag || github.ref#refs/tags/ }}
 
-      - name: 🪴 Extract service name
-        id: extract_service_name
-        run: echo ::set-output name=service_name::${{ steps.get_tag.outputs.tag | split('@')[0] }}
+      - name: ✅ Validate tag name
+        id: validate_tag
+        run: |
+          TAG=${{ steps.get_tag.outputs.tag }}
+          if [[ $TAG == school-web@* ]] || [[ $TAG == school-api@* ]]; then
+            echo "Tag name '$TAG' is valid."
+          else
+            echo "Tag name '$TAG' is not valid."
+            exit 1
+          fi
+
+      - name: 🪴 Get service name
+        id: get_service_name
+        run: echo ::set-output name=service_name::$(echo "${{ steps.get_tag.outputs.tag }}" | cut -d '@' -f 1)
 
       - name: 💭 Get service version
         id: get_service_version
-        run: echo ::set-output name=service_version::${{ steps.get_tag.outputs.tag | split('@')[1] }}
+        run: echo ::set-output name=service_version::$(echo "${{ steps.get_tag.outputs.tag }}" | cut -d '@' -f 2)
 
       - name: 🏗️ Docker Build & Push
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          SERVICE_NAME=$(echo ${{ steps.extract_service_name.outputs.service_name }})
+          SERVICE_NAME=$(echo ${{ steps.get_service_name.outputs.service_name }})
           SERVICE_VERSION=$(echo ${{ steps.get_service_version.outputs.service_version }})
           docker build . --target $SERVICE_NAME --tag $SERVICE_NAME:$SERVICE_VERSION
           docker tag $SERVICE_NAME:$SERVICE_VERSION $DOCKER_USERNAME/$SERVICE_NAME:$SERVICE_VERSION
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          docker push $SERVICE_NAME $DOCKER_USERNAME/$SERVICE_NAME:$SERVICE_VERSION
+          docker push $DOCKER_USERNAME/$SERVICE_NAME:$SERVICE_VERSION
