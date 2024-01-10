@@ -22,7 +22,7 @@ jobs:
         id: checkout
         uses: actions/checkout@v2.3.3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT }}
           fetch-depth: 0
 
       - name: 🟢 Setup node
@@ -69,4 +69,4 @@ jobs:
           publish: pnpm publish:packages
           commit: 'chore(release): version packages 🦋 [skip ci]'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+          GITHUB_TOKEN: ${{ secrets.PAT}}
