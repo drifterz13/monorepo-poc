@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       release_tag:
-        description: 'Release tag'
+        description: "Release tag"
         required: false
 
 jobs:
@@ -22,7 +22,12 @@ jobs:
 
       - name: 🪪 Get tag name
         id: get_tag
-        run: echo ::set-output name=tag::${{ github.event.inputs.release_tag || github.ref#refs/tags/ }}
+        run: |
+          TAG=${{ github.event.inputs.release_tag }}
+          if [[ -z "$TAG" ]]; then
+            TAG=${GITHUB_REF#refs/tags/}
+          fi
+          echo ::set-output name=tag::$TAG
 
       - name: ✅ Validate tag name
         id: validate_tag
