@@ -1,5 +1,11 @@
 # school-web
 
+## 0.0.7
+
+### Patch Changes
+
+- [`d8bb251`](https://github.com/drifterz13/monorepo-poc/commit/d8bb251a0740f08b2fb4e2ce4ac661ab2aff04c1) Thanks [@drifterz13](https://github.com/drifterz13)! - Update web's CSS
+
 ## 0.0.6
 
 ### Patch Changes
