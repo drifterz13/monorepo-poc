@@ -1,5 +1,11 @@
 # school-web
 
+## 0.0.17
+
+### Patch Changes
+
+- [`eddd343`](https://github.com/drifterz13/monorepo-poc/commit/eddd343f1190cdfbb2fccbf039248ce70c69198a) Thanks [@drifterz13](https://github.com/drifterz13)! - ci
+
 ## 0.0.16
 
 ### Patch Changes
