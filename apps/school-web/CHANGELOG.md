@@ -1,5 +1,11 @@
 # school-web
 
+## 0.0.10
+
+### Patch Changes
+
+- [`a169dfb`](https://github.com/drifterz13/monorepo-poc/commit/a169dfb4cf10bb61f7ced0753d02c9494d4fc136) Thanks [@drifterz13](https://github.com/drifterz13)! - Trigger CI
+
 ## 0.0.9
 
 ### Patch Changes
