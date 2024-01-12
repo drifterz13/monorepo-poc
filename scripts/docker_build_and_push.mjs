@@ -1,7 +1,7 @@
 #!/usr/bin/env zx
 
 const SERVICES = ["school-web", "school-core-api"];
-const DOCKER_USERNAME = "sklmix"; // TODO: Change this to GCP docker username.
+const DOCKER_USERNAME = "drifterz13"; // TODO: Change this to GCP docker username.
 const ENVIRONMENT = "dev";
 
 const PUBLISHED_PACKAGES = JSON.parse(argv.packages);
