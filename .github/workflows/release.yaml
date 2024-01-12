@@ -91,6 +91,6 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: 🏗️ Docker Build & Push
-        working-directory: ./scripts
+        working-directory: scripts
         run: |
           npx zx docker_build_and_push.mjs --packages='${{ needs.release.outputs.published_packages }}'
