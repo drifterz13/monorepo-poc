@@ -105,4 +105,4 @@ jobs:
 
       - name: 🏗️ Docker Build & Push
         run: |
-          npx zx ../scripts/docker-build-and-push.mjs
+          npx zx ../scripts/docker_build_and_push.mjs --packages=${{ needs.release.outputs.published_packages }}
