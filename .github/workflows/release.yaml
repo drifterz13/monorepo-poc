@@ -8,7 +8,6 @@ on:
       - "apps/**"
   workflow_dispatch:
 
-
 jobs:
   release:
     name: 🚀 Release
@@ -69,10 +68,10 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          title: 'chore(release): version packages 🦋'
+          title: "chore(release): version packages 🦋"
           publish: pnpm ci:publish
           version: pnpm ci:version
-          commit: 'chore(release): version packages 🦋 [skip ci]'
+          commit: "chore(release): version packages 🦋 [skip ci]"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -106,5 +105,4 @@ jobs:
 
       - name: 🏗️ Docker Build & Push
         run: |
-          chmod +x ../scripts/docker-build-and-push.sh
-          npx zx ../scripts/docker-build-and-push.sh
+          npx zx ../scripts/docker-build-and-push.mjs
